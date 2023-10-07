@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = app.get('views');
-console.log(app);
+
 const handleRequest = async (api) => {
   const [meta, home, about, { results: collections }] = await Promise.all([
     api.getSingle('meta'),
@@ -94,6 +94,7 @@ const handleRequest = async (api) => {
 
 app.get('/', async (req, res) => {
   const api = await initApi(req);
+
   const defaults = await handleRequest(api);
 
   res.render('pages/home', {
